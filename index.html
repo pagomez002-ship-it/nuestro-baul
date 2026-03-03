@@ -1,0 +1,301 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuestro Baúl ❤️</title>
+    <style>
+        /* Estilos generales */
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #ff4d6d, #ff8fab);
+            overflow-x: hidden;
+            color: white;
+            text-align: center;
+        }
+
+        /* Pantalla inicial */
+        #intro {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background: #ff2e63;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+            #intro button {
+                padding: 15px 40px;
+                font-size: 20px;
+                border: none;
+                border-radius: 30px;
+                background: white;
+                color: #ff2e63;
+                cursor: pointer;
+                transition: 0.3s;
+            }
+
+                #intro button:hover {
+                    transform: scale(1.1);
+                }
+
+        /* Contenido oculto al inicio */
+        #contenido {
+            display: none;
+            padding-top: 50px;
+        }
+
+        /* Animaciones */
+        @keyframes latido {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.3);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .corazon {
+            display: inline-block;
+            animation: latido 1s infinite;
+        }
+
+        /* Galería de fotos */
+        .gallery-section {
+            margin: 70px 20px;
+            background: rgba(255, 0, 90, 0.9);
+            padding: 50px;
+            border-radius: 25px;
+            box-shadow: 0 0 40px rgba(0,0,0,0.5);
+        }
+
+        .photo-box {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+            .photo-box img {
+                width: 220px;
+                height: 220px;
+                object-fit: cover;
+                border-radius: 25px;
+                border: 5px solid white;
+                transition: 0.4s;
+            }
+
+                .photo-box img:hover {
+                    transform: scale(1.15) rotate(2deg);
+                }
+
+        /* Footer */
+        .footer {
+            margin: 50px;
+            font-style: italic;
+            font-size: 40px;
+        }
+
+        /* Contador */
+        #contador {
+            font-size: 24px;
+            margin: 40px auto;
+            font-weight: bold;
+            background: rgba(255, 0, 90, 0.9);
+            padding: 30px;
+            border-radius: 25px;
+            width: fit-content;
+            box-shadow: 0 0 30px rgba(0,0,0,0.5);
+        }
+
+        /* Foto final */
+        .final-photo-section {
+            margin: 50px 20px;
+            padding: 50px;
+            border-radius: 25px;
+            background: linear-gradient(135deg, #ffb3c1, #ff2e63);
+            box-shadow: 0 0 40px rgba(0,0,0,0.4);
+            display: flex;
+            justify-content: center;
+        }
+
+            .final-photo-section img {
+                max-width: 100%;
+                height: auto;
+                border-radius: 25px;
+                border: 5px solid white;
+                box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            }
+
+        /* Carta romántica tipo sobre */
+        .carta-cerrada {
+            background: linear-gradient(135deg, #ffb3c1, #ff2e63);
+            border-radius: 25px;
+            padding: 30px;
+            margin: 40px auto;
+            width: fit-content;
+            max-width: 600px;
+            box-shadow: 0 0 30px rgba(0,0,0,0.4);
+            cursor: pointer;
+            perspective: 1000px;
+        }
+
+        .carta-inner {
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+            position: relative;
+        }
+
+        .carta-cerrada.carta-abierta .carta-inner {
+            transform: rotateX(180deg);
+        }
+
+        .carta-front, .carta-back {
+            backface-visibility: hidden;
+            border-radius: 25px;
+        }
+
+        .carta-front {
+            padding: 20px;
+        }
+
+        .carta-back {
+            transform: rotateX(180deg);
+            padding: 20px;
+        }
+
+            .carta-back p {
+                font-size: 18px;
+                line-height: 1.5;
+                color: white;
+            }
+
+        /* Responsive para móviles */
+        @media (max-width: 500px) {
+            .photo-box img {
+                width: 150px;
+                height: 150px;
+            }
+
+            .carta-cerrada {
+                padding: 20px;
+                max-width: 90%;
+            }
+
+            .carta-back p {
+                font-size: 16px;
+            }
+
+            #contador {
+                font-size: 20px;
+                padding: 20px;
+            }
+
+            .gallery-section {
+                padding: 30px;
+            }
+
+            .final-photo-section {
+                padding: 30px;
+                margin: 30px 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Pantalla inicial -->
+    <div id="intro">
+        <h1>❤️ Tengo algo especial para vos ❤️</h1>
+        <button onclick="iniciar()">Entrar</button>
+    </div>
+
+    <!-- Música -->
+    <audio id="musica" src="musica.mp3"></audio>
+
+    <!-- Contenido principal -->
+    <div id="contenido">
+        <h1><span class="corazon">❤️</span> Muy Feliz Cumpleaños Luu <span class="corazon">❤️</span></h1>
+
+        <div class="gallery-section">
+            <h2>Nuestras Fotos</h2>
+            <div class="photo-box">
+                <img src="foto1.jpg">
+                <img src="foto2.jpg">
+                <img src="foto3.jpg">
+            </div>
+        </div>
+
+        <!-- Carta romántica -->
+        <div id="carta" class="carta-cerrada" onclick="abrirCarta()">
+            <div class="carta-inner">
+                <div class="carta-front">
+                    <h2>TOCA AQUIIII!!! ❤️</h2>
+                </div>
+                <div class="carta-back">
+                    <!-- 👇 Aquí escribís tu contenido romántico -->
+                    <p>
+                        Mi amor, cada día a tu lado es un regalo. Gracias por estar conmigo, por tus sonrisas, tus abrazos y por hacerme tan feliz.
+                        Siempre juntos, siempre vos y yo. ❤️
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contador -->
+        <div id="contador">Cargando contador...</div>
+
+        <!-- Foto final -->
+        <div class="final-photo-section">
+            <img src="foto4.jpg" alt="Nuestra foto especial">
+        </div>
+
+        <div class="footer">
+            "Siempre vos y yo, contra el mundo ❤️"
+        </div>
+    </div>
+
+    <script>
+        function iniciar() {
+            document.getElementById("intro").style.display = "none";
+            document.getElementById("contenido").style.display = "block";
+            document.getElementById("musica").play();
+            iniciarContador();
+        }
+
+        // Contador
+        function iniciarContador() {
+            const contador = document.getElementById("contador");
+            const fechaInicio = new Date("2026-01-23T00:00:00");
+            function actualizar() {
+                const ahora = new Date();
+                let diff = ahora - fechaInicio;
+                if (diff < 0) diff = 0;
+                const dias = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const horas = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutos = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const segundos = Math.floor((diff % (1000 * 60)) / 1000);
+                contador.innerHTML = `Desde que estamos juntos han pasado: ${dias} días, ${horas} h, ${minutos} m, ${segundos} s`;
+            }
+            actualizar();
+            setInterval(actualizar, 1000);
+        }
+
+        // Carta animada tipo sobre
+        function abrirCarta() {
+            const carta = document.getElementById('carta');
+            carta.classList.toggle('carta-abierta');
+        }
+    </script>
+
+</body>
+</html>

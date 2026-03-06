@@ -4,18 +4,78 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nuestro Baúl ❤️</title>
+
+    <!-- Fuentes profesionales -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+
     <style>
-        /* Estilos generales */
+        /* General */
         body {
             margin: 0;
-            font-family: 'Segoe UI', sans-serif;
-            background: linear-gradient(135deg, #ff4d6d, #ff8fab);
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg,#ff4d6d,#ff8fab);
             overflow-x: hidden;
             color: white;
             text-align: center;
+            position: relative;
         }
 
-        /* Pantalla inicial */
+        /* Menú lateral */
+        .menu-lateral {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: rgba(255,255,255,0.95);
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+            z-index: 2000;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.3);
+        }
+
+            .menu-lateral a {
+                padding: 15px 30px;
+                text-decoration: none;
+                font-size: 20px;
+                color: #ff2e63;
+                display: block;
+                transition: 0.3s;
+                font-family: 'Playfair Display', serif;
+            }
+
+                .menu-lateral a:hover {
+                    background-color: #ff2e63;
+                    color: white;
+                    border-radius: 10px;
+                }
+
+            .menu-lateral .cerrar-btn {
+                position: absolute;
+                top: 20px;
+                right: 25px;
+                font-size: 40px;
+                color: #ff2e63;
+            }
+
+        /* Botón abrir menú */
+        .abrir-btn {
+            font-size: 30px;
+            cursor: pointer;
+            color: white;
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1500;
+            transition: 0.3s;
+        }
+
+            .abrir-btn:hover {
+                color: #ffd700;
+            }
+
+        /* Pantalla inicio */
         #intro {
             position: fixed;
             width: 100%;
@@ -43,13 +103,23 @@
                     transform: scale(1.1);
                 }
 
-        /* Contenido oculto al inicio */
+        /* Contenido */
         #contenido {
             display: none;
             padding-top: 50px;
         }
 
-        /* Animaciones */
+            /* Título principal */
+            #contenido h1 {
+                font-family: 'Playfair Display', serif;
+                font-size: 4rem;
+                font-weight: 700;
+                color: #fff;
+                text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+                margin-bottom: 40px;
+            }
+
+        /* Corazón latido */
         @keyframes latido {
             0% {
                 transform: scale(1);
@@ -69,10 +139,10 @@
             animation: latido 1s infinite;
         }
 
-        /* Galería de fotos */
+        /* Galería */
         .gallery-section {
             margin: 70px 20px;
-            background: rgba(255, 0, 90, 0.9);
+            background: rgba(255,0,90,0.9);
             padding: 50px;
             border-radius: 25px;
             box-shadow: 0 0 40px rgba(0,0,0,0.5);
@@ -91,30 +161,94 @@
                 object-fit: cover;
                 border-radius: 25px;
                 border: 5px solid white;
-                transition: 0.4s;
+                transition: 0.5s;
+                opacity: 0;
+                transform: translateY(50px) scale(0.8);
             }
+
+                .photo-box img.animar {
+                    opacity: 1;
+                    transform: translateY(0) scale(1);
+                }
 
                 .photo-box img:hover {
                     transform: scale(1.15) rotate(2deg);
                 }
 
-        /* Footer */
-        .footer {
-            margin: 50px;
-            font-style: italic;
-            font-size: 25px;
-        }
-
         /* Contador */
         #contador {
             font-size: 24px;
             margin: 40px auto;
-            font-weight: bold;
-            background: rgba(255, 0, 90, 0.9);
+            font-weight: 500;
+            background: rgba(255,0,90,0.9);
             padding: 30px;
             border-radius: 25px;
             width: fit-content;
             box-shadow: 0 0 30px rgba(0,0,0,0.5);
+        }
+
+        /* Carta tipo sobre */
+        .carta-cerrada {
+            width: fit-content;
+            max-width: 600px;
+            margin: 40px auto;
+            position: relative;
+            cursor: pointer;
+            perspective: 1000px;
+        }
+
+        .sobre {
+            width: 100%;
+            height: 70px;
+            background: white;
+            clip-path: polygon(0 0, 50% 100%, 100% 0);
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 2;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transform-origin: top center;
+            transition: transform 1s ease;
+        }
+
+        .carta-cerrada.carta-abierta .sobre {
+            transform: rotateX(-180deg) translateY(-70px);
+        }
+
+        .carta-inner {
+            position: relative;
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            z-index: 1;
+            color: #333;
+        }
+
+        .carta-front {
+            font-size: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 700;
+        }
+
+            .carta-front h2 {
+                color: #ffd700 !important;
+            }
+
+        .carta-back {
+            display: none;
+            font-size: 18px;
+            line-height: 1.5;
+        }
+
+        .carta-cerrada.carta-abierta .carta-front {
+            display: none;
+        }
+
+        .carta-cerrada.carta-abierta .carta-back {
+            display: block;
         }
 
         /* Foto final */
@@ -122,7 +256,7 @@
             margin: 50px 20px;
             padding: 50px;
             border-radius: 25px;
-            background: linear-gradient(135deg, #ffb3c1, #ff2e63);
+            background: linear-gradient(135deg,#ffb3c1,#ff2e63);
             box-shadow: 0 0 40px rgba(0,0,0,0.4);
             display: flex;
             justify-content: center;
@@ -130,104 +264,98 @@
 
             .final-photo-section img {
                 max-width: 100%;
-                height: auto;
                 border-radius: 25px;
                 border: 5px solid white;
-                box-shadow: 0 0 20px rgba(0,0,0,0.5);
             }
 
-        /* Carta romántica tipo sobre */
-        .carta-cerrada {
-            background: linear-gradient(135deg, #ffb3c1, #ff2e63);
-            border-radius: 25px;
-            padding: 30px;
-            margin: 40px auto;
-            width: fit-content;
-            max-width: 600px;
-            box-shadow: 0 0 30px rgba(0,0,0,0.4);
-            cursor: pointer;
-            perspective: 1000px;
+        /* Frase final */
+        .footer {
+            margin: 50px;
+            font-style: italic;
+            font-size: 25px;
         }
 
-        .carta-inner {
-            transition: transform 0.8s;
-            transform-style: preserve-3d;
-            position: relative;
+        /* Lluvia de corazones */
+        .corazon-lluvia {
+            position: fixed;
+            top: -20px;
+            font-size: 35px;
+            color: red;
+            animation: caer linear forwards;
+            pointer-events: none;
         }
 
-        .carta-cerrada.carta-abierta .carta-inner {
-            transform: rotateX(180deg);
+        @keyframes caer {
+            to {
+                transform: translateY(110vh) rotate(360deg);
+            }
         }
 
-        .carta-front, .carta-back {
-            backface-visibility: hidden;
-            border-radius: 25px;
+        /* Brillos románticos */
+        .brillo {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: white;
+            opacity: 0.8;
+            pointer-events: none;
+            animation: brillar 2s infinite;
         }
 
-        .carta-front {
-            padding: 20px;
-        }
-
-        .carta-back {
-            transform: rotateX(180deg);
-            padding: 20px;
-        }
-
-            .carta-back p {
-                font-size: 18px;
-                line-height: 1.5;
-                color: white;
+        @keyframes brillar {
+            0%,100% {
+                opacity: 0.2;
+                transform: scale(0.5);
             }
 
-        /* Responsive para móviles */
-        @media (max-width: 500px) {
+            50% {
+                opacity: 1;
+                transform: scale(1.2);
+            }
+        }
+
+        /* Responsive */
+        @media(max-width:500px) {
             .photo-box img {
                 width: 150px;
                 height: 150px;
             }
 
-            .carta-cerrada {
-                padding: 20px;
-                max-width: 90%;
-            }
-
-            .carta-back p {
-                font-size: 16px;
+            #contenido h1 {
+                font-size: 2.5rem;
             }
 
             #contador {
                 font-size: 20px;
                 padding: 20px;
             }
-
-            .gallery-section {
-                padding: 30px;
-            }
-
-            .final-photo-section {
-                padding: 30px;
-                margin: 30px 10px;
-            }
         }
     </style>
 </head>
 <body>
 
-    <!-- Pantalla inicial -->
+    <!-- Menú lateral -->
+    <div id="menu-lateral" class="menu-lateral">
+        <a href="javascript:void(0)" class="cerrar-btn" onclick="cerrarMenu()">&times;</a>
+        <a href="album.html" target="_blank">Album ❤️</a>
+    </div>
+    <span class="abrir-btn" onclick="abrirMenu()">&#9776;</span>
+
+    <!-- Pantalla de inicio -->
     <div id="intro">
-        <h1>Tengo algo especial para vos..</h1>
+        <h1>Bienvenidos a nuestro baul de recuerdos...</h1>
+        <h2>Y si... si tiene novio 😎</h2>
         <button onclick="iniciar()">Entrar</button>
     </div>
 
-    <!-- Música -->
-    <audio id="musica" src="musica.mp3"></audio>
+    <audio id="musica" src="musica1.mp3"></audio>
 
-    <!-- Contenido principal -->
     <div id="contenido">
-        <h1><span class="corazon">❤️</span> FELIZ CUMPLEAÑOS MI AMOR <span class="corazon">❤️</span></h1>
+        <h1><span class="corazon">❤️</span> Nuestro Baul de Recuerdos <span class="corazon">❤️</span></h1>
 
         <div class="gallery-section">
-            <h2>AMANDO NUESTRAS FOTOS!</h2>
+            <h2>NUESTRAS FOTOS</h2>
             <div class="photo-box">
                 <img src="foto1.jpg">
                 <img src="foto2.jpg">
@@ -235,44 +363,52 @@
             </div>
         </div>
 
-        <!-- Carta romántica -->
         <div id="carta" class="carta-cerrada" onclick="abrirCarta()">
+            <div class="sobre"></div>
             <div class="carta-inner">
                 <div class="carta-front">
-                    <h2>TOCA AQUIIII!!! ❤️</h2>
+                    <h2>TOCA AQUI ❤️</h2>
                 </div>
                 <div class="carta-back">
-                    <!-- 👇 Aquí escribís tu contenido romántico -->
                     <p>
-                        Lujan, cada día a tu lado es un regalo. Gracias por estar conmigo, por tus sonrisas, tus abrazos y por hacerme tan feliz.
-                        Siempre juntos, siempre vos y yo. Te amo, espero que seas muy feliz en el dia de tu cumpleaños y el resto de tu vida. ❤️
+                        <h3>Muy feliz cumpleaños mi amor ❤️</h3>
+                        Lujan, cada día a tu lado es un regalo.<br>
+                        Gracias por hacerme tan feliz y por compartir tu vida conmigo.<br>
+                        Espero que hoy tengas un día hermoso y que todos tus sueños se cumplan.<br>
+                        Siempre juntos... siempre vos y yo ❤️
                     </p>
                 </div>
             </div>
         </div>
 
-        <!-- Contador -->
         <div id="contador">Cargando contador...</div>
 
-        <!-- Foto final -->
         <div class="final-photo-section">
-            <img src="foto4.jpg" alt="Nuestra foto especial">
+            <img src="foto4.jpg">
         </div>
 
         <div class="footer">
-            "Siempre vos y yo, contra el mundo ❤️"
+            "Siempre vos y yo contra el mundo ❤️"
         </div>
     </div>
 
     <script>
+        /* Menú lateral */
+        function abrirMenu() { document.getElementById("menu-lateral").style.width = "250px"; }
+        function cerrarMenu() { document.getElementById("menu-lateral").style.width = "0"; }
+
+        /* Iniciar página */
         function iniciar() {
             document.getElementById("intro").style.display = "none";
             document.getElementById("contenido").style.display = "block";
             document.getElementById("musica").play();
             iniciarContador();
+            animarFotos();
+            confettiCorazones();
+            brillosRomanticos();
         }
 
-        // Contador
+        /* Contador */
         function iniciarContador() {
             const contador = document.getElementById("contador");
             const fechaInicio = new Date("2026-01-23T00:00:00");
@@ -284,19 +420,65 @@
                 const horas = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                 const minutos = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
                 const segundos = Math.floor((diff % (1000 * 60)) / 1000);
-                contador.innerHTML = `Desde que iniciamos mi bombon pasaron: ${dias} días, ${horas} h, ${minutos} m, ${segundos} s`;
+                contador.innerHTML = `Desde que iniciamos mi bombón pasaron: ${dias} días ${horas} h ${minutos} m ${segundos} s`;
             }
             actualizar();
             setInterval(actualizar, 1000);
         }
 
-        // Carta animada tipo sobre
+        /* Carta */
         function abrirCarta() {
-            const carta = document.getElementById('carta');
-            carta.classList.toggle('carta-abierta');
+            const carta = document.getElementById("carta");
+            carta.classList.toggle("carta-abierta");
+        }
+
+        /* Lluvia de corazones */
+        function lluviaDeCorazones() {
+            const corazon = document.createElement("div");
+            corazon.className = "corazon-lluvia";
+            corazon.innerHTML = "❤";
+            corazon.style.left = Math.random() * 100 + "vw";
+            corazon.style.animationDuration = (Math.random() * 3 + 2) + "s";
+            document.body.appendChild(corazon);
+            setTimeout(() => corazon.remove(), 5000);
+        }
+        setInterval(lluviaDeCorazones, 300);
+
+        /* Animación fotos */
+        function animarFotos() {
+            const fotos = document.querySelectorAll(".photo-box img");
+            fotos.forEach((img, i) => { setTimeout(() => { img.classList.add("animar"); }, i * 300); });
+        }
+
+        /* Confetti corazones */
+        function confettiCorazones() {
+            for (let i = 0; i < 30; i++) {
+                setTimeout(() => {
+                    const cor = document.createElement("div");
+                    cor.className = "corazon-lluvia";
+                    cor.innerHTML = "💖";
+                    cor.style.left = Math.random() * 100 + "vw";
+                    cor.style.fontSize = (Math.random() * 30 + 20) + "px";
+                    cor.style.animationDuration = (Math.random() * 2 + 2) + "s";
+                    document.body.appendChild(cor);
+                    setTimeout(() => cor.remove(), 5000);
+                }, i * 100);
+            }
+        }
+
+        /* Brillos románticos */
+        function brillosRomanticos() {
+            for (let i = 0; i < 50; i++) {
+                const brillo = document.createElement("div");
+                brillo.className = "brillo";
+                brillo.style.top = Math.random() * 100 + "vh";
+                brillo.style.left = Math.random() * 100 + "vw";
+                brillo.style.width = (Math.random() * 5 + 3) + "px";
+                brillo.style.height = (Math.random() * 5 + 3) + "px";
+                document.body.appendChild(brillo);
+            }
         }
     </script>
 
 </body>
-
 </html>
